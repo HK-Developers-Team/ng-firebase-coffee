@@ -1,0 +1,65 @@
+<p>
+    <a
+        routerLink="/admin/products/new"
+        class="btn btn-outline-primary"
+    >
+        New Product
+    </a>
+</p>
+<p>
+    <input
+        #query
+        (keyup)="filter(query.value)"
+        type="text"
+        class="form-control"
+        placeholder="Search something...."
+    >
+</p>
+
+
+<table
+    datatable
+    *ngIf="filteredProducts"
+    [dtOptions]="dtOptions"
+    class="table table-striped"
+>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of filteredProducts; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.price }}</td>
+            <td>
+                <a [routerLink]="['/admin/products/', item.id]">
+                    <i class="fal fa-edit"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<!-- <table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of filteredProducts">
+            <td>{{ item.title }}</td>
+            <td>{{ item.price }}</td>
+            <td>
+                <a [routerLink]="['/admin/products/', item.id]">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table> -->

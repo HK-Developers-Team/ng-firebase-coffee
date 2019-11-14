@@ -1,0 +1,54 @@
+<div class="container text-center">
+    <h1 class="">Shopping Cart</h1>
+    <ng-container *ngIf="cart">
+        <p>
+            You have {{ cart.totalItemsCount }} items in your shopping cart.
+        </p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col" style="width: 80px;">Thumbnail</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col" style="width: 230px;">Quantity</th>
+                    <th scope="col">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of cart.items; index as i">
+                    <td scope="row">{{ i + 1 }}</td>
+                    <td class="text-center" align="center">
+                        <div class="thumbnail" [style.backgroundImage]="'url(' + item.imageUrl + ')'"></div>
+                    </td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.price | currency:"USD":"symbol" }}</td>
+                    <td *ngIf="!isMobile">
+                        <product-quantity
+                            [product]="item"
+                            [cart]="cart"
+                        ></product-quantity>
+                    </td>
+                    <td *ngIf="isMobile">{{ item.quantity }}</td>
+                    <td>
+                        {{ item.totalPrice | currency:"USD":"symbol" }}
+                    </td>
+                </tr>
+                <tr *ngIf="cart.items.length == 0">
+                    <td colspan="5">No thing in this cart.</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th class="text-right">Total: </th>
+                <th colspan="2">
+                    {{ cart.totalPrice | currency:"USD":"symbol" }}
+                </th>
+            </tfoot>
+        </table>
+        <button class="btn btn-danger btn-sm float-left" (click)="clearCart()">Clear Shopping Cart</button>
+    </ng-container>
+</div>

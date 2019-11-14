@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 mb-3">
+            <div class="sticky-top">
+                <div class="list-group">
+                    <a
+                        class="list-group-item list-group-item-action"
+                        [class.active]="!category"
+                        routerLink="/"
+                    >
+                        All Products
+                    </a>
+                    <a
+                        class="list-group-item list-group-item-action"
+                        routerLink="/"
+                        [queryParams]="{ category: cate.id }"
+                        *ngFor="let cate of categories$ | async"
+                        [class.active]="category === cate.id"
+                    >
+                        {{ cate.name | titlecase }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-12">
+            <div
+                class="row"
+                *ngIf="cart$ | async as cart"
+            >
+                <ng-container *ngFor="let product of filteredProducts; index as i">
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                        <app-product-card
+                            [product]="product"
+                            [cart]="cart"
+                        ></app-product-card>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <button
+            class="btn btn-success"
+            (click)="showSuccess()"
+            ngbTooltip="Will disappear in 10s"
+        >
+            Success toast
+        </button>
+        &nbsp;
+    </div>
+</div>

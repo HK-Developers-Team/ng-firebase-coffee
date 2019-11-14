@@ -1,0 +1,25 @@
+.card-footer {
+  padding: 0;
+
+  & button {
+    cursor: pointer;
+  }
+}
+
+.thumbnail {
+  width: auto;
+  height: 260px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@media only all and (max-width: 765px) {
+  .thumbnail {
+    width: auto;
+    height: 320px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}

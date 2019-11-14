@@ -1,0 +1,105 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a
+        class="navbar-brand"
+        routerLink="/"
+    >
+        O
+    </a>
+    <!-- <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <button
+        class="navbar-toggler"
+        type="button"
+        (click)="isMenuCollapsed = !isMenuCollapsed"
+    >
+        <i class="fal fa-bars"></i>
+    </button>
+    <div
+        [ngbCollapse]="isMenuCollapsed"
+        class="collapse navbar-collapse"
+    >
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="/shopping-cart"
+                >
+                    <i class="fad fa-shopping-cart"></i>
+                    Shopping Cart
+                    <span
+                        class="badge badge-warning badge-pill"
+                        *ngIf="cart"
+                    >
+                        {{ cart.totalItemsCount }}
+                    </span>
+                </a>
+            </li>
+            <ng-template #notLogin>
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        routerLink="/login"
+                    >
+                        <i class="fad fa-key"></i>
+                        Login
+                    </a>
+                </li>
+            </ng-template>
+            <li
+                class="nav-item dropdown"
+                ngbDropdown
+                *ngIf="service.user$ | async as user; else notLogin"
+            >
+                <a
+                    class="nav-link dropdown-toggle"
+                    ngbDropdownToggle
+                >
+                    <i class="fad fa-user-circle"></i>
+                    {{ user.name }}
+                </a>
+                <div
+                    ngbDropdownMenu
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownBasic1"
+                >
+                    <a
+                        ngbDropdownItem
+                        routerLink="/my/orders"
+                    >
+                        My Orders
+                    </a>
+                    <div *ngIf="user.isAdmin">
+
+                        <a
+                            ngbDropdownItem
+                            routerLink="/admin/orders"
+                        >
+                            Manage Orders
+                        </a>
+                        <a
+                            ngbDropdownItem
+                            routerLink="/admin/products"
+                        >
+                            Manage Products
+                        </a>
+                    </div>
+                    <a
+                        ngbDropdownItem
+                        (click)="service.logOut()"
+                    >
+                        Log Out
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

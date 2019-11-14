@@ -1,0 +1,23 @@
+<div class="input-group">
+    <div class="input-group-prepend">
+        <button
+            class="btn btn-outline-danger"
+            type="button"
+            (click)="removeFromCart()"
+        >
+            <i class="fal fa-minus"></i>
+        </button>
+    </div>
+    <p class="form-control text-center">
+        {{ cart.getQuantity(product) }} in cart
+    </p>
+    <div class="input-group-append">
+        <button
+            class="btn btn-outline-success"
+            type="button"
+            (click)="addToCart()"
+        >
+        <i class="fal fa-plus"></i>
+        </button>
+    </div>
+</div>
