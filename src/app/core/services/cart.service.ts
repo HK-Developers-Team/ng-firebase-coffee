@@ -74,6 +74,7 @@ export class CartService {
 
   removeFormCart(product: Product) {
     this.updateItemQuantity(product, -1);
+    return true;
   }
 
   private async updateItemQuantity(product: Product, change: number) {
@@ -82,7 +83,9 @@ export class CartService {
     items$.valueChanges().pipe(take(1)).subscribe((item: any) => {
       if (item) {
         let quantity = (item.quantity || 0) + change;
-        if (quantity === 0) return items$.delete().then(result => console.log('deleted', result)).catch(err => console.log(err.message));
+        if (quantity === 0) {
+          return items$.delete().then(result => console.log(`${product.title} deleted`)).catch(err => console.log(err.message));
+        }
 
         items$.set({
           ...product,

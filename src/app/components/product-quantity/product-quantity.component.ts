@@ -1,3 +1,4 @@
+import { ToastService } from './../../core/services/toast.service';
 import { CartModel } from './../../core/models/cart.models';
 import { Product } from './../../core/models/product.model';
 import { CartService } from './../../core/services/cart.service';
@@ -12,9 +13,14 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProductQuantityComponent implements OnInit {
 
   @Input('product') product: Product;
-  @Input('cart') cart: CartModel; 
+  @Input('cart') cart: CartModel;
 
-  constructor(private cartService: CartService) { }
+  check: boolean;
+
+  constructor(
+    private cartService: CartService,
+    private toastService: ToastService
+  ) { }
 
   ngOnInit() {
   }
@@ -24,6 +30,14 @@ export class ProductQuantityComponent implements OnInit {
   }
 
   removeFromCart() {
-    this.cartService.removeFormCart(this.product)
+    this.check = this.cartService.removeFormCart(this.product)
+    if (this.check) {
+      this.toastService.show(`Delete 1 ${this.product.title} from cart.`, {
+        classname: 'bg-success text-light',
+        delay: 2000,
+        autohide: true,
+        headertext: 'Success'
+      });
+    }
   }
 }

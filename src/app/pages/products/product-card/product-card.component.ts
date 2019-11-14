@@ -32,11 +32,11 @@ export class ProductCardComponent implements OnInit {
         headertext: 'Error!!!'
       });
     } else {
-      this.toastService.show(`${this.product.title.toUpperCase()} abc has been added to the cart`, {
-        classname: 'bg-warning text-light',
+      this.toastService.show(`${this.product.title.toUpperCase()} has been added to the cart`, {
+        classname: 'bg-success text-light',
         delay: 2000,
         autohide: true,
-        headertext: 'Error!!!'
+        headertext: 'Success'
       });
     }
   }

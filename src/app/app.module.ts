@@ -24,7 +24,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { CustomFormsModule } from 'ng2-validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-// import { DataTableModule } from 'ng-angular8-datatable';
 import { DataTablesModule } from 'angular-datatables';
 import { ProductCardComponent } from './pages/products/product-card/product-card.component';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
